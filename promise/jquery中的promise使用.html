@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<body>
+    <button class="btn">点我发请求</button>
+</body>
+</html>
+<script>
+    // http://www.klxin.cn:3000/category/queryTopCategory
+    $('.btn').on('click', () => {
+        $.ajax({
+            url: 'http://www.klxin.cn:3000/category/queryTopCategory'
+        })
+        .then((res) => {
+            console.log(res)
+        })
+    })
+</script>

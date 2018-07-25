@@ -1,0 +1,23 @@
+npm 包管理工具
+
+1. 安装全局包
+   npm install 包名 -g  比如我要安装i5ting_toc使用命令是 npm install i5ting_toc -g使用方法 i5ting_toc -f xx.md -o
+   npm uninstall 包名 -g 卸载一个全局包
+
+2. 安装局部包
+   2.1 执行npm init -y 初始化package.json
+   2.2 下载jquery的命令是 npm install jquery --save
+   2.3 --save和--save-dev的区别是什么
+       --save（-S）  开发环境依赖
+       --save-dev(-D)测试环境依赖
+
+   2.4 卸载局部包
+       npm uninstall jquery --save
+
+3. 解决npm下包网速太慢的问题
+3.1 使用nrm   使用命令下载 npm install nrm -g
+    nrm ls展示所有的仓库
+    nrm use taobao 把npm默认的仓库改为淘宝的仓库
+3.2 npm install -g cnpm --registry=https://registry.npm.taobao.org
+    以后全部用cnpm 代替npm下载包
+    以前 npm install i5ting_toc -g 现在 cnpm install i5ting_toc

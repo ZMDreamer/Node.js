@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="按钮1">
+    <input type="button" value="按钮2">
+    <input type="button" value="按钮3">
+</body>
+</html>
+<script>
+    var btns = document.querySelectorAll('input');
+    // for(var i = 0; i < btns.length; i++) {
+    //     //此处要记录索引
+    //     btns[i].index = i;
+    //     btns[i].onclick = function(){
+
+    //         console.log(this.index);
+
+    //     }
+    // }
+    for(let i = 0; i < btns.length; i++) {
+        //此处要记录索引
+        btns[i].onclick = function(){
+            console.log(i);
+
+        }
+    }
+    //1. let定义的变量没有变量提升的功能
+    //2. 在{}内let每次都会开启一个新的作用域,独立的存放变量
+
+
+
+
+
+</script>

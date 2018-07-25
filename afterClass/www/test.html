@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.min.js" charset="utf-8"></script>
+    <script>
+        $(function () {
+            //注册功能
+            $('#register-btn').on('click', () => {
+                $.ajax({
+                    type: "get",
+                    url: "/user",
+                    data: {
+                        act: 'reg',
+                        user: $('[name=username]').val(),
+                        pass: $('[name = password]').val()
+                    },
+                    success: function (res) {
+
+                        var json = eval('(' + res + ')');
+
+                        if (json.ok) {
+                            alert('注册成功');
+                        } else {
+                            alert('注册失败：' + json.msg);
+                        }
+                    },
+                    error: function (res) {
+                        alert('通信错误');
+                    }
+                });
+            })
+            //登录功能
+            $('#login-btn').on('click', () => {
+                $.ajax({
+                    type: "get",
+                    url: "/user",
+                    data: {
+                        act: 'login',
+                        user: $('[name=username]').val(),
+                        pass: $('[name = password]').val()
+                    },
+                    success: function (res) {
+                        var json = eval('(' + res + ')');
+                        console.log(json)
+                        if (json.ok) {
+                            alert('登录成功');
+                        } else {
+                            alert('登录失败：' + json.msg);
+                        }
+                    },
+                    error: function (res) {
+                        alert('通信错误');
+                    }
+                });
+            })
+
+
+
+
+
+        })
+    </script>
+</head>
+
+<body>
+    用户:
+    <input type="text" name="username">
+    <br> 密码:
+    <input type="password" name="password">
+    <br> 登录:
+    <input type="button" value="登录" id="login-btn">
+    <br> 注册:
+    <input type="button" value="注册" id="register-btn">
+</body>
+
+</html>
