@@ -1,7 +1,7 @@
 {
   "name": "afterClass",
   "version": "1.0.0",
-  "description": "1. 基本介绍: http-无状态,所以需要利用session和cookies来记录一些数据\r 2. cookie: 在浏览器保存一些数据,每次请求都会带过来\r         1. 不安全,数据最大才(4k)\r 3. session: 保存数据,数据保存在服务端\r         1. 安全,数据量基本是无限的\r         2.基于cookie实现的,cookie中会有一个sessio的ID, 服务器利用sessionid找到session文件来进行读取和写入\r         3.隐患:session劫持\r -----\r ### 后台处理cookie和session过程\r - 发送cookie,给cookie添加标记 res.secret = \"字符串\";\r + 设置cookie, res.cookie(名字,值,{path:'/',maxAge:毫秒,signed:true});\r + 读取前台cookie cookie-parser\r ```\r   server.use(cookieParser('秘钥'));\r   server.use(()=>{\r       req.cookies //获取的是未签名版的cookie\r       req.signedCookies  //签名版的\r   })\r ```\r + 删除cookie `res.clearCookie(名字)`;\r + cookie-encrypter 给cookie加密的\r ------------------\r ** session 过程 **\r + cookie-session\r ```\r server.use(cookieParser());\r server.use(cookieSession(){\r     keys:[值1,值2,....]\r })\r server.use('/',(req,res)=>{\r );\r     //session设置\r     req.seesion\r     delete res.session[]\r })\r ```",
+  "description": "课后学习",
   "main": "3.js",
   "directories": {
     "lib": "lib"
@@ -16,6 +16,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "jade": "^1.11.0"
   }
 }
