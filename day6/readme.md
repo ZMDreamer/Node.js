@@ -112,3 +112,13 @@ function mysqlHandle(conn,str,obj){
     })
 }
   ```
+### 前后端分离开发模式注意点-跨域问题
+1. 如果不考虑表单的Post提交,可以使用JSONP来请求接口
+2. 所以需要CORS来跨域资源共享(Cross-Origin resource sharing)
+   + jsonp的原理是动态创建script标签来请求,核心就是后台返回一个函数的调用,返回函数的参数就是数据
+   + jsonp发送的不是ajax请求,不支持Post请求
+3. CORS本质: 使用XHR对象,发送ajax请求,进行跨域的资源共享
+   + CORS 发送的是真正的ajax请求
+   + 支持ajax的跨域
+   + 原理核心是: 自服务器端支持CORS,则浏览器能够正常访问CORS接口,效果跟普通的ajax请求一样
+4. 在Node中CORS 跨域通信,只需要下载第三方模块CORS然后使用即可
