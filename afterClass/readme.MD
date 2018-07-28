@@ -46,7 +46,19 @@ server.use('/',(req,res)=>{
     6. class类属性有点像数组所以可以用数组 `class=['aaa','bb','ccc']`只有class来用,普通写法也可以写
     7. 简写方式 ` div.box span#span`
     8. `&attributes`可以让属性的写法变成json格式的数据
-   ```
+    9. jade中`|`表示原样输出后面的内容,所以可以原样输出js代码
+    10. jade中`script.`表示原样输出标签里面的内容
+    11. jade中可以用`include`引入外面文件后面接文件名
+    12. jade中定义变量`  div 我的名字: #{name}`,还可以做一些简单的运算
+    13. jade中可以个标签同时加多个class类` div(class=arr class='active')`
+    14. jade中利用`-`来定义变量` -var a = 12;`
+    15. jade中标签后面用`=`一个变量可以给标签添加内容
+    16. jade中的for循环` -for(var i = 0; i < arr.length;i++) div=arr[i]`,if等类似
+    17. 怎么样在内容中嵌套标签 `div!=content`
+    18. jade中switch方法跟js不一样, `case a when0 div aaa when 1 div bb default div 123`
+    19. 如果前面是`-`代码段后面都可以不写
+   
+```
    html
    html
         head
@@ -59,8 +71,7 @@ server.use('/',(req,res)=>{
 //渲染模板的方法
 var str = jade.renderFile('./jade/1.jade',{pretty: true});
 console.log(str);
-   ````   
-
+````   
 
 
 
