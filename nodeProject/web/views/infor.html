@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/art-template/lib/template-web.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h3> <strong>  王者荣耀</strong> &nbsp;&nbsp;&nbsp;
+            <small>英雄具体信息</small>
+        </h3>
+        <hr>
+        <div class="clearfix">
+            <a href="/" class="btn btn-success pull-right">返回首页</a>
+        </div>
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <!-- On cells (`td` or `th`) -->
+                <tr class = "text-center text-primary">
+                    <td>编号</td>
+                    <td>名称</td>
+                    <td>性别</td>
+                    <td>创建时间</td>
+                </tr>
+            </thead>
+            <!-- On rows -->
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>
+<script type="text/template" id="indexTpl">
+    {{each data}}
+    <tr class="active text-center" >
+        <td>{{$value.id}}</td>
+        <td>{{$value.name}}</td>
+        <td>{{$value.gender}}</td>
+        <td>{{$value.ctime}}</td>
+        
+    </tr>
+    {{/each}}
+
+</script>
+
+<script>
+    $(function () {
+        //axios默认是get请求
+        const search =  new URLSearchParams(location.search);
+        const id = search.get('id');
+        axios('http://127.0.0.1:5000/api/gethero?id='+id).then((results) => {
+            if(results.status==200){
+                const response = results.data;
+                const table_html = template('indexTpl',response);
+                $('tbody').html(table_html);
+            }
+
+        });
+
+      
+
+
+    })
+</script>

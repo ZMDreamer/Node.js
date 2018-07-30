@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>
+            <strong> 添加英雄</strong>
+        </h3>
+        <hr>
+        <br>
+        <br>
+        <div class="alert alert-warning hidden" role="alert" id = "alert"></div>
+
+        <form>
+            <div class="form-group">
+                <label for="hero">英雄名称</label>
+                <input type="email" class="form-control" id="hero" placeholder="请输入英雄名称">
+            </div>
+            <div class="radio">
+                <h5>请选择英雄性别</h5>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="男" checked>男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="女"> 女
+                </label>
+
+            </div>
+            <span class="btn btn-primary" id="submit" >提交</span>
+        </form>
+    </div>
+
+</body>
+
+</html>
+<script>
+    $(function () {
+        $().alert();
+        $('#submit').on('click', () => {
+            if(!$('#hero').val()){
+                $('#alert').removeClass('hidden').text('请输入英雄名称');
+                return
+            }else{
+                $('#alert').addClass('hidden')
+            }
+            //放松请求添加数据
+            axios.post('http://127.0.0.1:5000/api/addhero',{
+                    name: $('#hero').val(),
+                    gender: $('[type=radio]:checked').val()
+            }).then((res)=>{
+                if(res.data.err_code==0&&res.data.affectedRows==1){
+                    location.href = "/";
+                }
+            })
+          
+        
+        })
+    })
+</script>

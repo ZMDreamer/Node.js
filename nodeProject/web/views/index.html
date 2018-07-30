@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/art-template/lib/template-web.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h3> <strong>  王者荣耀</strong> &nbsp;&nbsp;&nbsp;
+            <small>英雄管理器</small>
+        </h3>
+        <hr>
+        <div class="clearfix">
+            <a href="add.html" class="btn btn-success pull-right">添加新英雄</a>
+        </div>
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <!-- On cells (`td` or `th`) -->
+                <tr class = "text-center text-primary">
+                    <td>编号</td>
+                    <td>名称</td>
+                    <td>性别</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <!-- On rows -->
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>
+<script type="text/template" id="indexTpl">
+    {{each data}}
+    <tr class="active text-center" >
+        <td>{{$value.id}}</td>
+        <td>{{$value.name}}</td>
+        <td>{{$value.gender}}</td>
+        <td>{{$value.ctime}}</td>
+        <td >
+            <a href="edit.html?id={{$value.id}}" class = " btn btn-danger btn-sm">编辑</a>
+            <a href="infor.html?id={{$value.id}}" class = " btn btn-danger btn-sm">查看</a>
+            <span class = " btn btn-danger btn-sm" id = "btn-delete" data-hero-id ='{{$value.id}}' >删除</span>
+        </td>
+    </tr>
+    {{/each}}
+
+</script>
+
+<script>
+    $(function () {
+        //axios默认是get请求
+        axios('http://127.0.0.1:5000/api/getheros').then((results) => {
+            if(results.status==200){
+                const response = results.data;
+                const table_html = template('indexTpl',response);
+                $('tbody').html(table_html);
+            }
+
+        });
+
+        //点击删除删除该条数据
+        //用事件委托的时候不要用匿名函数,不然获取不到元素上的属性
+        $('tbody').on('click','#btn-delete',function(){
+            const id = $(this).data('hero-id');
+            axios.get('http://127.0.0.1:5000/api/delhero',{
+               params:{
+                id:id
+               }
+            }).then((res)=>{
+                if(res.status==200&&res.data.err_code==0){
+                    location.href = '/';
+                }
+            })
+        })
+
+
+
+
+    })
+</script>
